@@ -10,14 +10,14 @@ export type AuthState = {
   user: User | null;
   signingIn: boolean;
   signingUp: boolean;
-  authorizing: boolean;
+  isAuthorized: boolean;
 };
 
 const InitialAuthState: AuthState = {
   user: null,
   signingIn: false,
   signingUp: false,
-  authorizing: true,
+  isAuthorized: false,
 };
 
 const authReducer = createReducer<AuthState>(InitialAuthState, {
@@ -30,11 +30,12 @@ const authReducer = createReducer<AuthState>(InitialAuthState, {
     ...state,
     user,
     signingIn: false,
+    isAuthorized: true,
   }),
   [getType(a.signInAsync.failure)]: (state, {payload}) => ({
     ...state,
     signingIn: false,
-    authorizing: false,
+    isAuthorized: false,
     responseErrorMessage: payload,
   }),
   [getType(a.signUpAsync.request)]: (state) => ({
@@ -53,7 +54,7 @@ const authReducer = createReducer<AuthState>(InitialAuthState, {
   }),
   [getType(a.signOutAsync.success)]: () => ({
     ...InitialAuthState,
-    authorizing: false,
+    isAuthorized: false,
   }),
 });
 

@@ -1,10 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+
+// Constants
 import {AppRoute} from '../../../../constants';
 
-type Props = {};
+// HOCs
+import withSignUp, {WithSignUpProps} from '../../hoc/withSignUp';
 
-const SignUpPage: React.FC<Props> = (props) => {
+type Props = WithSignUpProps;
+
+const SignUpPage = (props: Props) => {
   const {} = props;
 
   return (
@@ -15,4 +20,4 @@ const SignUpPage: React.FC<Props> = (props) => {
   );
 };
 
-export default SignUpPage;
+export default withSignUp(SignUpPage);

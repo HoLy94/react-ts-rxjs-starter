@@ -10,10 +10,10 @@ import {RootState} from '../../../store/root-reducer';
 import {signUpAsync} from '../store/actions';
 
 // Selectors
-import {selectSigningUp} from '../store/selectors';
+import {signingUpSelector} from '../store/selectors';
 
 const mapStateToProps = (state: RootState) => ({
-  signingUp: selectSigningUp(state),
+  signingUp: signingUpSelector(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

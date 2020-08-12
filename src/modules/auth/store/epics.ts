@@ -1,11 +1,8 @@
 import {AnyAction} from 'redux';
-import {filter} from 'rxjs/operators';
+import {filter, map, catchError} from 'rxjs/operators';
 import {isActionOf} from 'typesafe-actions';
-import {
-  combineEpics,
-  ActionsObservable,
-  StateObservable,
-} from 'redux-observable';
+import {of} from 'rxjs';
+import {ActionsObservable, StateObservable} from 'redux-observable';
 
 // Actions
 import * as a from './actions';
@@ -18,7 +15,12 @@ export const signInEpic = (
   action$: ActionsObservable<AnyAction>,
   _: StateObservable<RootState>,
   d: EpicDependencies,
-) => action$.pipe(filter(isActionOf(a.signInAsync.request)));
+) =>
+  action$.pipe(
+    filter(isActionOf(a.signInAsync.request)),
+    map(() => a.signInAsync.success({name: 'Test'})),
+    catchError((e) => of(a.signInAsync.failure(e))),
+  );
 
 export const signOutEpic = (
   action$: ActionsObservable<AnyAction>,
@@ -31,5 +33,3 @@ export const signUpEpic = (
   state$: StateObservable<RootState>,
   d: EpicDependencies,
 ) => action$.pipe(filter(isActionOf(a.signUpAsync.request)));
-
-export default combineEpics(signInEpic, signOutEpic, signUpEpic);

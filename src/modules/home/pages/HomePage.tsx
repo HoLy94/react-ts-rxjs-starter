@@ -4,7 +4,7 @@ import {AppRoute} from '../../../constants';
 
 type Props = {};
 
-const HomePage: React.FC<Props> = (props) => {
+const HomePage = (props: Props) => {
   const {} = props;
 
   return (
