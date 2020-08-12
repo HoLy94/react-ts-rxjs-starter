@@ -1,31 +1,32 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
 
 // Constants
 import {AppRoute} from '../constants';
 
 // Components
-import PrivateRoute from '../components/PrivateRoute';
+import AuthorizedRoute from '../components/Route/AuthorizedRoute';
+import UnAuthorizedRoute from '../components/Route/UnAuthorizedRoute';
 
 // Pages
 import SignInPage from './auth/pages/SignInPage';
 import SignUpPage from './auth/pages/SignUpPage';
-import HomePage from './home/pages/HomePage';
+import MainPage from './main/pages/MainPage';
 
 const App = () => (
-  <div className="App">
+  <>
     <Switch>
-      <Route path={AppRoute.SignIn}>
+      <UnAuthorizedRoute path={AppRoute.SignIn}>
         <SignInPage />
-      </Route>
-      <Route path={AppRoute.SignUp}>
+      </UnAuthorizedRoute>
+      <UnAuthorizedRoute path={AppRoute.SignUp}>
         <SignUpPage />
-      </Route>
-      <PrivateRoute path={AppRoute.Home}>
-        <HomePage />
-      </PrivateRoute>
+      </UnAuthorizedRoute>
+      <AuthorizedRoute path={AppRoute.Home}>
+        <MainPage />
+      </AuthorizedRoute>
     </Switch>
-  </div>
+  </>
 );
 
 export default App;

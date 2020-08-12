@@ -3,12 +3,12 @@ import {useSelector} from 'react-redux';
 import {Route, Redirect, RouteProps} from 'react-router-dom';
 
 // Constants
-import {AppRoute} from '../constants';
+import {AppRoute} from '../../constants';
 
 // Selectors
-import {isAuthorizedSelector} from '../modules/auth/store/selectors';
+import {isAuthorizedSelector} from '../../modules/auth/store/selectors';
 
-const PrivateRoute = (props: RouteProps) => {
+const AuthorizedRoute = (props: RouteProps) => {
   const {children, path, location, exact} = props;
   const isAuthorized = useSelector(isAuthorizedSelector);
 
@@ -32,4 +32,4 @@ const PrivateRoute = (props: RouteProps) => {
   );
 };
 
-export default PrivateRoute;
+export default AuthorizedRoute;
