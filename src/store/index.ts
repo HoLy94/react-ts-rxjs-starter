@@ -1,6 +1,6 @@
 import {createLogger} from 'redux-logger';
 import {createEpicMiddleware} from 'redux-observable';
-import {AnyAction, applyMiddleware, createStore, Store} from 'redux';
+import {AnyAction, applyMiddleware, createStore} from 'redux';
 
 // Reducer
 import rootReducer, {RootState} from './root-reducer';
