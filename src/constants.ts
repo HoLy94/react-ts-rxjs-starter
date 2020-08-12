@@ -4,6 +4,4 @@ export const AppRoute = {
   SignUp: '/sign-up',
   // Private
   Home: '/',
-  Record: '/record',
-  RecordPreview: '/preview/:id',
 };

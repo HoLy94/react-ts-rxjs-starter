@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+
+// Constants
 import {AppRoute} from '../../../constants';
 
 type Props = {};

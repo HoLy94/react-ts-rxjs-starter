@@ -1,4 +1,6 @@
 import {createAction, createAsyncAction} from 'typesafe-actions';
+
+// Models
 import {SignInCredentials, SignUpCredentials, User} from '../models';
 
 export const signInAsync = createAsyncAction(

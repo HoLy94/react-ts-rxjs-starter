@@ -1,4 +1,5 @@
 import React from 'react';
+import {Helmet} from 'react-helmet';
 import {Link} from 'react-router-dom';
 
 // Constants
@@ -14,6 +15,9 @@ const SignUpPage = (props: Props) => {
 
   return (
     <div>
+      <Helmet>
+        <title>Sign up</title>
+      </Helmet>
       <h2>Sing up page</h2>
       <Link to={AppRoute.Home}>Home page</Link>
     </div>

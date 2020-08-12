@@ -1,7 +1,7 @@
-import {AnyAction} from 'redux';
-import {filter, map, catchError} from 'rxjs/operators';
-import {isActionOf} from 'typesafe-actions';
 import {of} from 'rxjs';
+import {AnyAction} from 'redux';
+import {isActionOf} from 'typesafe-actions';
+import {filter, map, catchError} from 'rxjs/operators';
 import {ActionsObservable, StateObservable} from 'redux-observable';
 
 // Actions
