@@ -39,4 +39,10 @@ export const signUpEpic = (
   action$: ActionsObservable<AnyAction>,
   state$: StateObservable<RootState>,
   d: EpicDependencies,
-) => action$.pipe(filter(isActionOf(a.signUpAsync.request)));
+) =>
+  action$.pipe(
+    filter(isActionOf(a.signUpAsync.request)),
+    delay(1),
+    map(() => a.signUpAsync.success()),
+    catchError((e) => of(a.signUpAsync.failure(e))),
+  );

@@ -9,6 +9,6 @@ export type SignInCredentials = {
 
 export type SignUpCredentials = {
   email: string;
-  nickname: string;
   password: string;
+  confirm?: string;
 };
