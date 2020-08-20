@@ -5,7 +5,7 @@ import withSignIn, {WithSignInProps} from '../../hoc/withSignIn';
 
 // Components
 import AuthLayout from '../../../../components/Layout/AuthLayout';
-import SignInForm from '../../components/SignInForm';
+import SignInFormPlate from '../../components/SignInFormPlate';
 
 type Props = WithSignInProps;
 
@@ -14,7 +14,7 @@ const SignInPage = (props: Props) => {
 
   return (
     <AuthLayout title="Sing in">
-      <SignInForm />
+      <SignInFormPlate />
     </AuthLayout>
   );
 };

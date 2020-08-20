@@ -5,7 +5,7 @@ import withSignUp, {WithSignUpProps} from '../../hoc/withSignUp';
 
 // Components
 import AuthLayout from '../../../../components/Layout/AuthLayout';
-import SignUpForm from '../../components/SignUpForm';
+import SignUpFormPlate from '../../components/SignUpFormPlate';
 
 type Props = WithSignUpProps;
 
@@ -14,7 +14,7 @@ const SignUpPage = (props: Props) => {
 
   return (
     <AuthLayout title="Sign up">
-      <SignUpForm />
+      <SignUpFormPlate />
     </AuthLayout>
   );
 };
