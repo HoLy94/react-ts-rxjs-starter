@@ -5,6 +5,7 @@ const useStyles = makeStyles(({spacing, palette, typography}: Theme) =>
     container: {
       padding: `${spacing(3)}px ${spacing(2)}px`,
       minWidth: 320,
+      borderRadius: spacing(2),
     },
     form: {
       display: 'flex',

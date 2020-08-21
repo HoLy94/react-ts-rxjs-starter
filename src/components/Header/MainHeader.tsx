@@ -5,19 +5,16 @@ import {Box, Button, Typography} from '@material-ui/core';
 // Actions
 import {signOutAsync} from '../../modules/auth/store/actions';
 
+// Styles
+import useStyles from './mainHeaderStyle';
+
 const MainHeader = () => {
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   return (
-    <Box
-      component="header"
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
-      py={1}
-      px={2}
-    >
-      <Typography variant="h4" color="textPrimary">
+    <Box className={classes.container} component="header">
+      <Typography variant="h5" className={classes.title}>
         Main header
       </Typography>
       <Button

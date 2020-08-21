@@ -1,5 +1,5 @@
 // Models
-import {FormConfig, FormFieldTag} from '../../components/FormBuilder/models';
+import {FormFieldTag} from '../../components/FormBuilder/models';
 
 export const AUTH_HEADER = 'x-auth-token';
 export const AUTH_STORAGE_KEY = 'auth';
@@ -9,7 +9,7 @@ export const AuthEndpoint = {
   USER: 'users/current',
 };
 
-export const signInFormConfig: FormConfig = {
+export const signInFormConfig = {
   initialValues: {
     email: '',
     password: '',
@@ -32,7 +32,7 @@ export const signInFormConfig: FormConfig = {
   ],
 };
 
-export const signUpFormConfig: FormConfig = {
+export const signUpFormConfig = {
   initialValues: {
     email: '',
     password: '',

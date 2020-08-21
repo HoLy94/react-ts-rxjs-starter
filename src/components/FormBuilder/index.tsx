@@ -1,5 +1,6 @@
 import React from 'react';
 import Yup from 'yup';
+import classNames from 'classnames';
 import {yupResolver} from '@hookform/resolvers';
 import {Controller, useForm} from 'react-hook-form';
 import {Button, TextField} from '@material-ui/core';
@@ -15,6 +16,7 @@ type Props = {
   validationSchema: Yup.ObjectSchema;
   onSubmit(params: any): void;
   submitText: string;
+  isSubmitDisabled?: boolean;
   fields: FormField[];
   initialValues: {[value: string]: string};
 };
@@ -27,6 +29,7 @@ const FormBuilder = (props: Props) => {
     validationSchema,
     initialValues,
     fields,
+    isSubmitDisabled = false,
   } = props;
   const classes = useStyles();
   const {handleSubmit, errors, control} = useForm({
@@ -40,6 +43,7 @@ const FormBuilder = (props: Props) => {
     if (tag === FormFieldTag.Input) {
       return (
         <Controller
+          key={name}
           as={TextField}
           name={name}
           type={type}
@@ -57,13 +61,17 @@ const FormBuilder = (props: Props) => {
   };
 
   return (
-    <form className={className} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={classNames(classes.form, className)}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       {fields.map(renderField)}
       <Button
         className={classes.submitButton}
         type="submit"
         variant="contained"
         color="primary"
+        disabled={isSubmitDisabled}
       >
         {submitText}
       </Button>

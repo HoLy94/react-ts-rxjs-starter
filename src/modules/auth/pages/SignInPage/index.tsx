@@ -1,22 +1,31 @@
 import React from 'react';
 
-// HOCs
-import withSignIn, {WithSignInProps} from '../../hoc/withSignIn';
+// Constants
+import {AppRoute} from '../../../../constants';
 
 // Components
 import AuthLayout from '../../../../components/Layout/AuthLayout';
-import SignInFormPlate from '../../components/SignInFormPlate';
+import SignInForm from '../../components/SignInForm';
+import AuthFormPlate from '../../components/AuthFormPlate';
 
-type Props = WithSignInProps;
+type Props = {};
 
 const SignInPage = (props: Props) => {
   const {} = props;
 
   return (
     <AuthLayout title="Sing in">
-      <SignInFormPlate />
+      <AuthFormPlate
+        title="Sign in"
+        withFooter
+        footerLinkText="Dont have account?"
+        footerTitle="Sign up"
+        footerLinkUrl={AppRoute.SignUp}
+      >
+        <SignInForm />
+      </AuthFormPlate>
     </AuthLayout>
   );
 };
 
-export default withSignIn(SignInPage);
+export default SignInPage;
