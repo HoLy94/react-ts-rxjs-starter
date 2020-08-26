@@ -14,7 +14,7 @@ type Props = {
   children: NonNullable<React.ReactNode>;
 };
 
-const AuthFormPlate = (props: Props) => {
+const AuthFormPlate: React.FC<Props> = (props: Props) => {
   const {
     title,
     children,
@@ -49,6 +49,14 @@ const AuthFormPlate = (props: Props) => {
       {withFooter && renderFooter()}
     </Paper>
   );
+};
+
+AuthFormPlate.defaultProps = {
+  title: '',
+  withFooter: false,
+  footerTitle: '',
+  footerLinkText: '',
+  footerLinkUrl: '',
 };
 
 export default AuthFormPlate;

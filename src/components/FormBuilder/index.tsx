@@ -79,4 +79,9 @@ const FormBuilder = (props: Props) => {
   );
 };
 
+FormBuilder.defaultProps = {
+  className: '',
+  isSubmitDisabled: false,
+};
+
 export default FormBuilder;
