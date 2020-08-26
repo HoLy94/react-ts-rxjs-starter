@@ -14,9 +14,7 @@ const MainHeader = () => {
 
   return (
     <Box className={classes.container} component="header">
-      <Typography variant="h5" className={classes.title}>
-        Main header
-      </Typography>
+      <Typography variant="h5">Main header</Typography>
       <Button
         color="secondary"
         size="small"
