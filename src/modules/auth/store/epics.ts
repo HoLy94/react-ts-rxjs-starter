@@ -19,7 +19,11 @@ export const signInEpic = (
   action$.pipe(
     filter(isActionOf(a.signInAsync.request)),
     delay(1),
-    map(() => a.signInAsync.success({name: 'Test'})),
+    map(() => {
+      localStorage.setItem('token', 'Test token');
+
+      return a.signInAsync.success({name: 'Test'});
+    }),
     catchError((e) => of(a.signInAsync.failure(e))),
   );
 
@@ -43,6 +47,10 @@ export const signUpEpic = (
   action$.pipe(
     filter(isActionOf(a.signUpAsync.request)),
     delay(1),
-    map(() => a.signUpAsync.success()),
+    map(() => {
+      localStorage.removeItem('token');
+
+      return a.signUpAsync.success();
+    }),
     catchError((e) => of(a.signUpAsync.failure(e))),
   );
