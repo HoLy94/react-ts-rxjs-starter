@@ -1,4 +1,4 @@
-# react-ts-rxjs-starter
+# react-ts-rxjs-materialUi-starter
 
 In the project directory, you can run:
 
