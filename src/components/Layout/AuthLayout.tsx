@@ -11,7 +11,7 @@ type Props = {
 };
 
 const AuthLayout = (props: Props) => {
-  const {title, children} = props;
+  const {title = '', children} = props;
   const classes = useStyles();
 
   return (

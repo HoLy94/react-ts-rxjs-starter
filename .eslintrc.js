@@ -36,5 +36,11 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    "react/require-default-props": "off",
+    'react/jsx-props-no-spreading': "off",
+    'import/prefer-default-export': "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   },
 };

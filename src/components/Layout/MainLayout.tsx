@@ -11,7 +11,7 @@ type Props = {
 };
 
 const MainLayout = (props: Props) => {
-  const {title, children} = props;
+  const {title = '', children} = props;
 
   return (
     <>

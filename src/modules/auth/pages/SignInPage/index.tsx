@@ -13,8 +13,8 @@ const SignInPage: React.FC = () => (
     <AuthFormPlate
       title="Sign in"
       withFooter
-      footerLinkText="Dont have account?"
-      footerTitle="Sign up"
+      footerLinkText="Sign up"
+      footerTitle="Dont have account?"
       footerLinkUrl={AppRoute.SignUp}
     >
       <SignInForm />

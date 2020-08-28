@@ -23,7 +23,7 @@ type Props = {
 
 const FormBuilder = (props: Props) => {
   const {
-    className,
+    className = '',
     onSubmit,
     submitText,
     validationSchema,
@@ -53,6 +53,7 @@ const FormBuilder = (props: Props) => {
           margin="dense"
           error={Boolean(errors[name])}
           helperText={errors[name]?.message}
+          autoComplete="off"
         />
       );
     }
@@ -77,11 +78,6 @@ const FormBuilder = (props: Props) => {
       </Button>
     </form>
   );
-};
-
-FormBuilder.defaultProps = {
-  className: '',
-  isSubmitDisabled: false,
 };
 
 export default FormBuilder;
