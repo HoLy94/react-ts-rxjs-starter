@@ -12,7 +12,7 @@ import withSignUp, {WithSignUpProps} from '../../hoc/withSignUp';
 // Validation
 import {signUpSchema} from '../../../../utils/validationSchemas';
 
-const SignUpForm = (props: WithSignUpProps) => {
+const SignUpForm: React.FC<WithSignUpProps> = (props) => {
   const {signUp, signingUp} = props;
 
   return (

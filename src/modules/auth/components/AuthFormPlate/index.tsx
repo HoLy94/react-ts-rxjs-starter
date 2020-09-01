@@ -11,17 +11,16 @@ type Props = {
   footerTitle?: string;
   footerLinkText?: string;
   footerLinkUrl?: string;
-  children: NonNullable<React.ReactNode>;
 };
 
-const AuthFormPlate: React.FC<Props> = (props: Props) => {
+const AuthFormPlate: React.FC<Props> = (props) => {
   const {
-    title,
+    title = '',
+    withFooter = false,
+    footerTitle = '',
+    footerLinkText = '',
+    footerLinkUrl = '',
     children,
-    footerLinkText,
-    footerLinkUrl,
-    footerTitle,
-    withFooter = true,
   } = props;
   const classes = useStyles();
 
@@ -49,14 +48,6 @@ const AuthFormPlate: React.FC<Props> = (props: Props) => {
       {withFooter && renderFooter()}
     </Paper>
   );
-};
-
-AuthFormPlate.defaultProps = {
-  title: '',
-  withFooter: false,
-  footerTitle: '',
-  footerLinkText: '',
-  footerLinkUrl: '',
 };
 
 export default AuthFormPlate;

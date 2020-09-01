@@ -21,7 +21,7 @@ type Props = {
   initialValues: {[value: string]: string};
 };
 
-const FormBuilder = (props: Props) => {
+const FormBuilder: React.FC<Props> = (props) => {
   const {
     className = '',
     onSubmit,

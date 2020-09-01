@@ -10,7 +10,7 @@ type Props = {
   children: NonNullable<React.ReactNode>;
 };
 
-const AuthLayout = (props: Props) => {
+const AuthLayout: React.FC<Props> = (props) => {
   const {title = '', children} = props;
   const classes = useStyles();
 

@@ -10,7 +10,7 @@ type Props = {
   children: React.ReactNodeArray;
 };
 
-const MainLayout = (props: Props) => {
+const MainLayout: React.FC<Props> = (props) => {
   const {title = '', children} = props;
 
   return (

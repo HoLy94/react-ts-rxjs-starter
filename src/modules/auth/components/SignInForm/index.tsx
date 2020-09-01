@@ -12,7 +12,7 @@ import withSignIn, {WithSignInProps} from '../../hoc/withSignIn';
 // Validation
 import {signInSchema} from '../../../../utils/validationSchemas';
 
-const SignInForm = (props: WithSignInProps) => {
+const SignInForm: React.FC<WithSignInProps> = (props) => {
   const {signIn, signingIn} = props;
 
   return (
