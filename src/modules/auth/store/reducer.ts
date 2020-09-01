@@ -17,7 +17,7 @@ const InitialAuthState: AuthState = {
   user: null,
   signingIn: false,
   signingUp: false,
-  isAuthorized: false,
+  isAuthorized: true,
 };
 
 const authReducer = createReducer<AuthState>(InitialAuthState, {

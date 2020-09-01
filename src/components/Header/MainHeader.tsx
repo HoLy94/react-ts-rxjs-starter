@@ -2,6 +2,9 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {Box, Button, Typography} from '@material-ui/core';
 
+// Components
+import ThemeSwitch from '../ThemeSwitch';
+
 // Actions
 import {signOutAsync} from '../../modules/auth/store/actions';
 
@@ -15,6 +18,7 @@ const MainHeader = () => {
   return (
     <Box className={classes.container} component="header">
       <Typography variant="h5">Main header</Typography>
+      <ThemeSwitch />
       <Button
         color="secondary"
         size="small"

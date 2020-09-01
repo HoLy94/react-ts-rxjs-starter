@@ -1,5 +1,5 @@
-import React from 'react';
-import {Provider} from 'react-redux';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
@@ -7,24 +7,37 @@ import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 // App
 import MainSwitch from './navigation/MainSwitch';
 
-// Store
-import createReduxStoreWithEpic from '../store';
+// HOCs
+import withDarkMode, {WithThemeTypeProps} from './common/hoc/withDarkMode';
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-  },
-});
+// Models
+import {ThemePaletteTypeEnum} from './common/models';
 
-const App = () => (
-  <Provider store={createReduxStoreWithEpic()}>
+// Actions
+import {getIsDarkMode} from './common/store/actions';
+
+const App: React.FC<WithThemeTypeProps> = (props) => {
+  const {isDarkMode} = props;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getIsDarkMode());
+  }, [dispatch]);
+
+  const theme = createMuiTheme({
+    palette: {
+      type: isDarkMode ? ThemePaletteTypeEnum.DARK : ThemePaletteTypeEnum.LIGHT,
+    },
+  });
+
+  return (
     <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <MainSwitch />
       </ThemeProvider>
     </Router>
-  </Provider>
-);
+  );
+};
 
-export default App;
+export default withDarkMode(App);
