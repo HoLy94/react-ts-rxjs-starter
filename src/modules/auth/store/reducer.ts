@@ -11,20 +11,21 @@ export type AuthState = {
   signingIn: boolean;
   signingUp: boolean;
   isAuthorized: boolean;
+  isAuthorizing: boolean;
 };
 
 const InitialAuthState: AuthState = {
   user: null,
   signingIn: false,
   signingUp: false,
-  isAuthorized: true,
+  isAuthorized: false,
+  isAuthorizing: false,
 };
 
 const authReducer = createReducer<AuthState>(InitialAuthState, {
   [getType(a.signInAsync.request)]: (state) => ({
     ...state,
     signingIn: true,
-    responseErrorMessage: undefined,
   }),
   [getType(a.signInAsync.success)]: (state, {payload: user}) => ({
     ...state,
@@ -32,25 +33,36 @@ const authReducer = createReducer<AuthState>(InitialAuthState, {
     signingIn: false,
     isAuthorized: true,
   }),
-  [getType(a.signInAsync.failure)]: (state, {payload}) => ({
+  [getType(a.signInAsync.failure)]: (state) => ({
     ...state,
     signingIn: false,
     isAuthorized: false,
-    responseErrorMessage: payload,
   }),
   [getType(a.signUpAsync.request)]: (state) => ({
     ...state,
     signingUp: true,
-    responseErrorMessage: undefined,
   }),
   [getType(a.signUpAsync.success)]: (state) => ({
     ...state,
     signingUp: false,
   }),
-  [getType(a.signUpAsync.failure)]: (state, {payload}) => ({
+  [getType(a.signUpAsync.failure)]: (state) => ({
     ...state,
     signingUp: false,
-    responseErrorMessage: payload,
+  }),
+  [getType(a.attemptSignIn)]: (state) => ({
+    ...state,
+    isAuthorizing: true,
+  }),
+  [getType(a.attemptSignInFailed)]: (state) => ({
+    ...state,
+    isAuthorizing: false,
+  }),
+  [getType(a.fetchCurrentUserAsync.success)]: (state, {payload: user}) => ({
+    ...state,
+    user,
+    isAuthorized: true,
+    isAuthorizing: false,
   }),
   [getType(a.signOutAsync.success)]: () => ({
     ...InitialAuthState,

@@ -18,5 +18,12 @@ export const signOutAsync = createAsyncAction(
   '@@auth/SIGN_OUT_SUCCEEDED',
   '@@auth/SIGN_OUT_FAILED',
 )<undefined, undefined, unknown>();
-
+export const fetchCurrentUserAsync = createAsyncAction(
+  '@@auth/FETCH_CURRENT_USER_REQUEST',
+  '@@auth/FETCH_CURRENT_USER_SUCCEEDED',
+  '@@auth/FETCH_CURRENT_USER_FAILED',
+)<undefined, User, unknown>();
 export const attemptSignIn = createAction('@@auth/ATTEMPT_SIGN_IN')();
+export const attemptSignInFailed = createAction(
+  '@@auth/ATTEMPT_SIGN_IN_FAILED',
+)();

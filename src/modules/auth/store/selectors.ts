@@ -18,3 +18,8 @@ export const isAuthorizedSelector = createSelector(
   selectAuthStateSlice,
   (s) => s.isAuthorized,
 );
+
+export const isAuthorizingSelector = createSelector(
+  selectAuthStateSlice,
+  (s) => s.isAuthorizing,
+);

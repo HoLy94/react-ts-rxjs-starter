@@ -1,7 +1,9 @@
 export type AuthService = {
-  name: 'auth';
+  token: string;
 };
 
-const authService: AuthService = Object.create({});
+const authService: AuthService = {
+  token: '',
+};
 
 export default authService;

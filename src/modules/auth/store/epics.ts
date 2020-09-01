@@ -27,18 +27,6 @@ export const signInEpic = (
     catchError((e) => of(a.signInAsync.failure(e))),
   );
 
-export const signOutEpic = (
-  action$: ActionsObservable<AnyAction>,
-  state$: StateObservable<RootState>,
-  d: EpicDependencies,
-) =>
-  action$.pipe(
-    filter(isActionOf(a.signOutAsync.request)),
-    delay(0.5),
-    map(() => a.signOutAsync.success()),
-    catchError((e) => of(a.signOutAsync.failure(e))),
-  );
-
 export const signUpEpic = (
   action$: ActionsObservable<AnyAction>,
   state$: StateObservable<RootState>,
@@ -53,4 +41,54 @@ export const signUpEpic = (
       return a.signUpAsync.success();
     }),
     catchError((e) => of(a.signUpAsync.failure(e))),
+  );
+
+export const signOutEpic = (
+  action$: ActionsObservable<AnyAction>,
+  state$: StateObservable<RootState>,
+  d: EpicDependencies,
+) =>
+  action$.pipe(
+    filter(isActionOf(a.signOutAsync.request)),
+    delay(0.5),
+    map(() => {
+      localStorage.removeItem('token');
+
+      return a.signOutAsync.success();
+    }),
+    catchError((e) => of(a.signOutAsync.failure(e))),
+  );
+
+export const attemptSignInEpic = (
+  action$: ActionsObservable<AnyAction>,
+  state$: StateObservable<RootState>,
+  d: EpicDependencies,
+) =>
+  action$.pipe(
+    filter(isActionOf(a.attemptSignIn)),
+    map(() => {
+      const token = localStorage.getItem('token');
+
+      if (token !== null) {
+        d.authService.token = token;
+
+        return a.fetchCurrentUserAsync.request();
+      }
+
+      return a.attemptSignInFailed();
+    }),
+  );
+
+export const fetchCurrentUserEpic = (
+  action$: ActionsObservable<AnyAction>,
+  _: StateObservable<RootState>,
+  d: EpicDependencies,
+) =>
+  action$.pipe(
+    filter(isActionOf(a.fetchCurrentUserAsync.request)),
+    delay(1),
+    map(() => {
+      return a.fetchCurrentUserAsync.success({name: 'Test'});
+    }),
+    catchError((e) => of(a.fetchCurrentUserAsync.failure(e))),
   );
