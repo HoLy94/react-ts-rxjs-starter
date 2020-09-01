@@ -9,7 +9,7 @@ import {AppRoute} from '../../navigation/constants';
 import MainLayout from '../../../components/Layout/MainLayout';
 
 const MainPage: React.FC = () => (
-  <MainLayout>
+  <MainLayout title="Main page">
     <Typography variant="h6" gutterBottom>
       Home page
     </Typography>
