@@ -27,6 +27,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
     project: './tsconfig.json',
+    createDefaultProgram: true,
   },
   rules: {
     'linebreak-style': 'off',

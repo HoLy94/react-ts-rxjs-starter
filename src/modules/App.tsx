@@ -1,32 +1,30 @@
 import React from 'react';
-import {Switch} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import {BrowserRouter as Router} from 'react-router-dom';
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 
-// Constants
-import {AppRoute} from '../constants';
+// App
+import MainSwitch from './navigation/MainSwitch';
 
-// Components
-import AuthorizedRoute from '../components/Route/AuthorizedRoute';
-import UnAuthorizedRoute from '../components/Route/UnAuthorizedRoute';
+// Store
+import createReduxStoreWithEpic from '../store';
 
-// Pages
-import SignInPage from './auth/pages/SignInPage';
-import SignUpPage from './auth/pages/SignUpPage';
-import MainPage from './main/pages/MainPage';
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 
 const App = () => (
-  <>
-    <Switch>
-      <UnAuthorizedRoute path={AppRoute.SignIn}>
-        <SignInPage />
-      </UnAuthorizedRoute>
-      <UnAuthorizedRoute path={AppRoute.SignUp}>
-        <SignUpPage />
-      </UnAuthorizedRoute>
-      <AuthorizedRoute path={AppRoute.Home}>
-        <MainPage />
-      </AuthorizedRoute>
-    </Switch>
-  </>
+  <Provider store={createReduxStoreWithEpic()}>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <MainSwitch />
+      </ThemeProvider>
+    </Router>
+  </Provider>
 );
 
 export default App;

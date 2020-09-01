@@ -6,7 +6,7 @@ import {Route, Redirect, RouteProps} from 'react-router-dom';
 import {AppRoute} from '../../constants';
 
 // Selectors
-import {isAuthorizedSelector} from '../../modules/auth/store/selectors';
+import {isAuthorizedSelector} from '../../../auth/store/selectors';
 
 const AuthorizedRoute = (props: RouteProps) => {
   const {children, path, location, exact} = props;

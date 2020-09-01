@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Constants
-import {AppRoute} from '../../../../constants';
+import {AppRoute} from '../../../navigation/constants';
 
 // Components
 import AuthLayout from '../../../../components/Layout/AuthLayout';
