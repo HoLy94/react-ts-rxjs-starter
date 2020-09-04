@@ -10,7 +10,7 @@ type Props = {
   children: NonNullable<React.ReactNode>;
 };
 
-const AuthLayout: React.FC<Props> = (props) => {
+const AuthLayout: React.FC<Props> = React.memo((props) => {
   const {title = '', children} = props;
   const classes = useStyles();
 
@@ -20,6 +20,6 @@ const AuthLayout: React.FC<Props> = (props) => {
       <Container className={classes.container}>{children}</Container>
     </>
   );
-};
+});
 
 export default AuthLayout;

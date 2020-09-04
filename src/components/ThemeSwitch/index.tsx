@@ -1,26 +1,30 @@
 import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {Switch, FormControlLabel} from '@material-ui/core';
 
-// HOCs
-import withDarkMode, {
-  WithThemeTypeProps,
-} from '../../modules/common/hoc/withDarkMode';
+// Selectors
+import {isDarkModeSelector} from '../../modules/common/store/selectors';
 
-const ThemeSwitch: React.FC<WithThemeTypeProps> = ({
-  toggleDarkMode,
-  isDarkMode,
-}) => (
-  <FormControlLabel
-    control={
-      <Switch
-        checked={isDarkMode}
-        onChange={toggleDarkMode}
-        color="primary"
-        size="small"
-      />
-    }
-    label="Dark mode"
-  />
-);
+// Actions
+import {toggleDarkMode} from '../../modules/common/store/actions';
 
-export default withDarkMode(ThemeSwitch);
+const ThemeSwitch: React.FC = () => {
+  const dispatch = useDispatch();
+  const isDarkMode = useSelector(isDarkModeSelector);
+
+  return (
+    <FormControlLabel
+      control={
+        <Switch
+          checked={isDarkMode}
+          onChange={() => dispatch(toggleDarkMode())}
+          color="primary"
+          size="small"
+        />
+      }
+      label="Dark mode"
+    />
+  );
+};
+
+export default ThemeSwitch;

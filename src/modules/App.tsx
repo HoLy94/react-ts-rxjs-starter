@@ -8,9 +8,6 @@ import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 // Components
 import MainSwitch from './navigation/MainSwitch';
 
-// HOCs
-import withDarkMode, {WithThemeTypeProps} from './common/hoc/withDarkMode';
-
 // Models
 import {ThemePaletteTypeEnum} from './common/models';
 
@@ -19,10 +16,13 @@ import {attemptSignIn} from './auth/store/actions';
 import {getIsDarkMode} from './common/store/actions';
 
 // Selectors
-import {isAppLoadingSelector} from './common/store/selectors';
+import {
+  isAppLoadingSelector,
+  isDarkModeSelector,
+} from './common/store/selectors';
 
-const App: React.FC<WithThemeTypeProps> = (props) => {
-  const {isDarkMode} = props;
+const App: React.FC = () => {
+  const isDarkMode = useSelector(isDarkModeSelector);
   const dispatch = useDispatch();
   const isAppLoading = useSelector(isAppLoadingSelector);
 
@@ -40,7 +40,7 @@ const App: React.FC<WithThemeTypeProps> = (props) => {
   return (
     <Router>
       {isAppLoading ? (
-        <Backdrop open={isAppLoading}>
+        <Backdrop open>
           <CircularProgress />
         </Backdrop>
       ) : (
@@ -53,4 +53,4 @@ const App: React.FC<WithThemeTypeProps> = (props) => {
   );
 };
 
-export default withDarkMode(App);
+export default App;

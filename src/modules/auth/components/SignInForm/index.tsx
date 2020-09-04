@@ -1,4 +1,8 @@
 import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+
+// Models
+import {SignInCredentials} from '../../models';
 
 // Constants
 import {signInFormConfig} from '../../constants';
@@ -6,18 +10,25 @@ import {signInFormConfig} from '../../constants';
 // Components
 import FormBuilder from '../../../../components/FormBuilder';
 
-// HOCs
-import withSignIn, {WithSignInProps} from '../../hoc/withSignIn';
-
 // Validation
 import {signInSchema} from '../../../../utils/validationSchemas';
 
-const SignInForm: React.FC<WithSignInProps> = (props) => {
-  const {signIn, signingIn} = props;
+// Selectors
+import {signingInSelector} from '../../store/selectors';
+
+// Actions
+import {signInAsync} from '../../store/actions';
+
+const SignInForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const signingIn = useSelector(signingInSelector);
+
+  const handleSubmit = (params: SignInCredentials) =>
+    dispatch(signInAsync.request(params));
 
   return (
     <FormBuilder
-      onSubmit={signIn}
+      onSubmit={handleSubmit}
       fields={signInFormConfig.fields}
       initialValues={signInFormConfig.initialValues}
       submitText="Sign in"
@@ -27,4 +38,4 @@ const SignInForm: React.FC<WithSignInProps> = (props) => {
   );
 };
 
-export default withSignIn(SignInForm);
+export default SignInForm;

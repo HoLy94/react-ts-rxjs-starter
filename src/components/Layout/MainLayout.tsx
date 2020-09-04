@@ -10,7 +10,7 @@ type Props = {
   children: React.ReactNodeArray;
 };
 
-const MainLayout: React.FC<Props> = (props) => {
+const MainLayout: React.FC<Props> = React.memo((props) => {
   const {title = '', children} = props;
 
   return (
@@ -20,6 +20,6 @@ const MainLayout: React.FC<Props> = (props) => {
       <Container>{children}</Container>
     </>
   );
-};
+});
 
 export default MainLayout;

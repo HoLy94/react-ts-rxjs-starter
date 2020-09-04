@@ -13,7 +13,7 @@ type Props = {
   footerLinkUrl?: string;
 };
 
-const AuthFormPlate: React.FC<Props> = (props) => {
+const AuthFormPlate: React.FC<Props> = React.memo((props) => {
   const {
     title = '',
     withFooter = false,
@@ -48,6 +48,6 @@ const AuthFormPlate: React.FC<Props> = (props) => {
       {withFooter && renderFooter()}
     </Paper>
   );
-};
+});
 
 export default AuthFormPlate;
