@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {BrowserRouter as Router} from 'react-router-dom';
 import {Backdrop, CircularProgress} from '@material-ui/core';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 
@@ -37,19 +36,19 @@ const App: React.FC = () => {
     },
   });
 
+  if (isAppLoading) {
+    return (
+      <Backdrop open>
+        <CircularProgress />
+      </Backdrop>
+    );
+  }
+
   return (
-    <Router>
-      {isAppLoading ? (
-        <Backdrop open>
-          <CircularProgress />
-        </Backdrop>
-      ) : (
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <MainSwitch />
-        </ThemeProvider>
-      )}
-    </Router>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <MainSwitch />
+    </ThemeProvider>
   );
 };
 
