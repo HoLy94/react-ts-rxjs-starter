@@ -38,6 +38,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    "no-void": "off",
     "react/require-default-props": "off",
     'react/jsx-props-no-spreading': "off",
     'import/prefer-default-export': "off",

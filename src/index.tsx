@@ -4,7 +4,7 @@ import {render} from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 // App
-import App from './modules/App';
+import App from './modules';
 
 // Workers
 import * as serviceWorker from './serviceWorker';

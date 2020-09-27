@@ -5,56 +5,26 @@ import {User} from '../models';
 
 // Actions
 import * as a from './actions';
+import * as signInActions from '../sign-in/store/actions';
 
 export type AuthState = {
   user: User | null;
-  signingIn: boolean;
-  signingUp: boolean;
   isAuthorized: boolean;
   isAuthorizing: boolean;
 };
 
 const InitialAuthState: AuthState = {
   user: null,
-  signingIn: false,
-  signingUp: false,
   isAuthorized: false,
   isAuthorizing: true,
 };
 
 const authReducer = createReducer<AuthState>(InitialAuthState, {
-  [getType(a.signInAsync.request)]: (state) => ({
-    ...state,
-    signingIn: true,
-  }),
-  [getType(a.signInAsync.success)]: (state, {payload: user}) => ({
-    ...state,
-    user,
-    signingIn: false,
-    isAuthorized: true,
-  }),
-  [getType(a.signInAsync.failure)]: (state) => ({
-    ...state,
-    signingIn: false,
-    isAuthorized: false,
-  }),
-  [getType(a.signUpAsync.request)]: (state) => ({
-    ...state,
-    signingUp: true,
-  }),
-  [getType(a.signUpAsync.success)]: (state) => ({
-    ...state,
-    signingUp: false,
-  }),
-  [getType(a.signUpAsync.failure)]: (state) => ({
-    ...state,
-    signingUp: false,
-  }),
-  [getType(a.attemptSignIn)]: (state) => ({
+  [getType(signInActions.attemptSignIn)]: (state) => ({
     ...state,
     isAuthorizing: true,
   }),
-  [getType(a.attemptSignInFailed)]: (state) => ({
+  [getType(signInActions.attemptSignInFailed)]: (state) => ({
     ...state,
     isAuthorizing: false,
   }),
@@ -64,9 +34,15 @@ const authReducer = createReducer<AuthState>(InitialAuthState, {
     isAuthorized: true,
     isAuthorizing: false,
   }),
+  [getType(a.fetchCurrentUserAsync.failure)]: (state) => ({
+    ...state,
+    isAuthorized: false,
+    isAuthorizing: false,
+  }),
   [getType(a.signOutAsync.success)]: () => ({
     ...InitialAuthState,
     isAuthorized: false,
+    isAuthorizing: false,
   }),
 });
 

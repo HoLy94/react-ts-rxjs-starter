@@ -5,13 +5,12 @@ import {Switch} from 'react-router-dom';
 import {AppRoute} from './constants';
 
 // Components
-import AuthorizedRoute from './components/Route/AuthorizedRoute';
-import UnAuthorizedRoute from './components/Route/UnAuthorizedRoute';
+import {UnAuthorizedRoute, AuthorizedRoute} from './components/Route';
 
 // Pages
-import SignInPage from '../auth/pages/SignInPage';
-import SignUpPage from '../auth/pages/SignUpPage';
-import MainPage from '../main/pages/MainPage';
+import SignInPage from '../auth/sign-in';
+import SignUpPage from '../auth/sign-up';
+import MainPage from '../main';
 
 const MainSwitch = () => (
   <>

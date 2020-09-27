@@ -3,7 +3,7 @@ import {createSelector} from 'reselect';
 import {isAuthorizingSelector} from '../../auth/store/selectors';
 
 // Models
-import {RootState} from '../../../store/root-reducer';
+import {RootState} from '../../../store/rootReducer';
 
 const selectCommonStateSlice = (state: RootState) => state.common;
 

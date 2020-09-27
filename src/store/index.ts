@@ -3,19 +3,19 @@ import {createEpicMiddleware} from 'redux-observable';
 import {AnyAction, applyMiddleware, createStore} from 'redux';
 
 // Reducer
-import rootReducer, {RootState} from './root-reducer';
+import rootReducer, {RootState} from './rootReducer';
 
 // Root epic
-import rootEpic from './root-epic';
+import rootEpic from './rootEpic';
 
 // Epic-dependencies
-import dependencies, {EpicDependencies} from './epic-dependencies';
+import dependencies, {Dependencies} from './dependencies';
 
 const epicMiddleware = createEpicMiddleware<
   AnyAction,
   AnyAction,
   RootState,
-  EpicDependencies
+  Dependencies
 >({dependencies});
 const logger = createLogger({
   collapsed: true,

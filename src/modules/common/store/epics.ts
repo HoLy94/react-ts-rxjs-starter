@@ -7,8 +7,8 @@ import {ActionsObservable, StateObservable} from 'redux-observable';
 import * as a from './actions';
 
 // Models
-import {RootState} from '../../../store/root-reducer';
-import {EpicDependencies} from '../../../store/epic-dependencies';
+import {RootState} from '../../../store/rootReducer';
+import {Dependencies} from '../../../store/dependencies';
 
 // Selectors
 import {isDarkModeSelector} from './selectors';
@@ -16,7 +16,7 @@ import {isDarkModeSelector} from './selectors';
 export const setIsDarkModeEpic = (
   action$: ActionsObservable<AnyAction>,
   state$: StateObservable<RootState>,
-  d: EpicDependencies,
+  d: Dependencies,
 ) =>
   action$.pipe(
     filter(isActionOf(a.toggleDarkMode)),
@@ -33,7 +33,7 @@ export const setIsDarkModeEpic = (
 export const getIsDarkModeEpic = (
   action$: ActionsObservable<AnyAction>,
   _: StateObservable<RootState>,
-  d: EpicDependencies,
+  d: Dependencies,
 ) =>
   action$.pipe(
     filter(isActionOf(a.getIsDarkMode)),
