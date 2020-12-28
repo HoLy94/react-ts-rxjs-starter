@@ -17,13 +17,13 @@ import {signingInSelector} from '../../store/selectors';
 import {signInAsync} from '../../store/actions';
 
 // Models
-import {SignInCredentials} from '../../models';
+import {SignInDto} from '../../models';
 
 const SignInForm: React.FC = () => {
   const dispatch = useDispatch();
   const signingIn = useSelector(signingInSelector);
 
-  const handleSubmit = (params: SignInCredentials) =>
+  const handleSubmit = (params: SignInDto) =>
     dispatch(signInAsync.request(params));
 
   return (

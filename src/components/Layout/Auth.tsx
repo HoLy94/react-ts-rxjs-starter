@@ -2,6 +2,9 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import {Container} from '@material-ui/core';
 
+// Container
+import {ServerErrorMessage} from '../ServerErrorMessage';
+
 // Styles
 import useStyles from './styles';
 
@@ -18,6 +21,7 @@ const Auth: React.FC<Props> = (props) => {
     <>
       <Helmet>{title && <title>{title}</title>}</Helmet>
       <Container className={classes.container__auth}>{children}</Container>
+      <ServerErrorMessage />
     </>
   );
 };

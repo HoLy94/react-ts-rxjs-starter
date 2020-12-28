@@ -1,27 +1,40 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
-import {Container} from '@material-ui/core';
+import classNames from 'classnames';
+import {CircularProgress, Container} from '@material-ui/core';
 
 // Components
 import {MainHeader} from '../Header';
+import {ServerErrorMessage} from '../ServerErrorMessage';
 
 // Styles
 import useStyles from './styles';
 
 type Props = {
   title?: string;
-  children: React.ReactNodeArray;
+  isLoading?: boolean;
+  children: React.ReactNode;
+  className?: string;
 };
 
 const Main: React.FC<Props> = (props) => {
-  const {title = '', children} = props;
+  const {title = '', children, isLoading = false, className} = props;
   const classes = useStyles();
 
   return (
     <>
       <Helmet>{title && <title>{title}</title>}</Helmet>
       <MainHeader />
-      <Container className={classes.container__main}>{children}</Container>
+      <Container className={classNames(classes.container__main, className)}>
+        {isLoading ? (
+          <div className={classes.loading_container}>
+            <CircularProgress size={30} />
+          </div>
+        ) : (
+          (children as React.ReactNodeArray)
+        )}
+      </Container>
+      <ServerErrorMessage />
     </>
   );
 };

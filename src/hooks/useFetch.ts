@@ -31,7 +31,7 @@ const useFetch = (url: string, options: any) => {
   }, [url, options, signal]);
 
   useEffect(() => {
-    void request();
+    request();
 
     return () => {
       abortController.abort();

@@ -6,13 +6,16 @@ import {Switch, FormControlLabel} from '@material-ui/core';
 import {isDarkModeSelector} from '../../modules/common/store/selectors';
 
 // Actions
-import {toggleDarkMode} from '../../modules/common/store/actions';
+import {setIsDarkMode} from '../../modules/common/store/actions';
 
 const ThemeSwitch: React.FC = () => {
   const dispatch = useDispatch();
   const isDarkMode = useSelector(isDarkModeSelector);
 
-  const handleChange = () => dispatch(toggleDarkMode());
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean,
+  ) => dispatch(setIsDarkMode.request(checked));
 
   return (
     <FormControlLabel

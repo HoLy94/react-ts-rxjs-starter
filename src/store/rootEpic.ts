@@ -11,7 +11,7 @@ import {
 // Common
 import {
   setIsDarkModeEpic,
-  getIsDarkModeEpic,
+  getParamsFromStorageEpic,
 } from '../modules/common/store/epics';
 
 export default combineEpics(
@@ -21,5 +21,5 @@ export default combineEpics(
   attemptSignInEpic,
   fetchCurrentUserEpic,
   setIsDarkModeEpic,
-  getIsDarkModeEpic,
+  getParamsFromStorageEpic,
 );

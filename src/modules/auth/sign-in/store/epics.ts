@@ -1,12 +1,16 @@
 import {of} from 'rxjs';
 import {AnyAction} from 'redux';
 import {isActionOf} from 'typesafe-actions';
-import {filter, map, catchError, delay, mergeMap} from 'rxjs/operators';
+import {filter, map, catchError, mergeMap} from 'rxjs/operators';
 import {ActionsObservable, StateObservable} from 'redux-observable';
 
 // Actions
 import * as a from './actions';
 import * as authActions from '../../store/actions';
+import {setServerError} from '../../../common/store/actions';
+
+// Constants
+import {TOKEN_STORAGE_KEY} from '../../constants';
 
 // Models
 import {RootState} from '../../../../store/rootReducer';
@@ -14,21 +18,20 @@ import {Dependencies} from '../../../../store/dependencies';
 
 export const signInEpic = (
   action$: ActionsObservable<AnyAction>,
-  _: StateObservable<RootState>,
+  state$: StateObservable<RootState>,
   d: Dependencies,
 ) =>
   action$.pipe(
     filter(isActionOf(a.signInAsync.request)),
-    delay(1000),
     mergeMap(() => {
-      localStorage.setItem('token', 'Test token');
+      d.localStorageService.setItem(TOKEN_STORAGE_KEY, 'Test token');
 
       return of(
         a.signInAsync.success(),
         authActions.fetchCurrentUserAsync.request(),
       );
     }),
-    catchError((e) => of(a.signInAsync.failure(e))),
+    catchError((e) => of([a.signInAsync.failure(e), setServerError(e)])),
   );
 
 export const attemptSignInEpic = (
@@ -37,16 +40,16 @@ export const attemptSignInEpic = (
   d: Dependencies,
 ) =>
   action$.pipe(
-    filter(isActionOf(a.attemptSignIn)),
+    filter(isActionOf(a.attemptSignIn.request)),
     map(() => {
-      const token = localStorage.getItem('token');
+      const token = d.localStorageService.getItem(TOKEN_STORAGE_KEY);
 
       if (token !== null) {
-        d.authService.token = token;
+        d.authService.setToken(token);
 
         return authActions.fetchCurrentUserAsync.request();
       }
 
-      return a.attemptSignInFailed();
+      return a.attemptSignIn.failure();
     }),
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import Yup from 'yup';
 import classNames from 'classnames';
-import {yupResolver} from '@hookform/resolvers';
+import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
 import {Button, TextField} from '@material-ui/core';
 
@@ -13,7 +13,7 @@ import useStyles from './style';
 
 type Props = {
   className?: string;
-  validationSchema: Yup.ObjectSchema;
+  validationSchema: Yup.ObjectSchema<any>;
   onSubmit(params: any): void;
   submitText: string;
   isSubmitDisabled?: boolean;

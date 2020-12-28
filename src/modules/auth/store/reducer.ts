@@ -20,11 +20,11 @@ const InitialAuthState: AuthState = {
 };
 
 const authReducer = createReducer<AuthState>(InitialAuthState, {
-  [getType(signInActions.attemptSignIn)]: (state) => ({
+  [getType(signInActions.attemptSignIn.request)]: (state) => ({
     ...state,
     isAuthorizing: true,
   }),
-  [getType(signInActions.attemptSignInFailed)]: (state) => ({
+  [getType(signInActions.attemptSignIn.failure)]: (state) => ({
     ...state,
     isAuthorizing: false,
   }),

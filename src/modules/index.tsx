@@ -5,14 +5,14 @@ import {Backdrop, CircularProgress} from '@material-ui/core';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 
 // Components
-import MainSwitch from './navigation/MainSwitch';
+import MainSwitch from './navigation';
 
 // Models
 import {ThemePaletteTypeEnum} from './common/models';
 
 // Actions
 import {attemptSignIn} from './auth/sign-in/store/actions';
-import {getIsDarkMode} from './common/store/actions';
+import {getParamsFromStorage} from './common/store/actions';
 
 // Selectors
 import {
@@ -20,14 +20,14 @@ import {
   isDarkModeSelector,
 } from './common/store/selectors';
 
-const Index: React.FC = () => {
-  const isDarkMode = useSelector(isDarkModeSelector);
+const App: React.FC = () => {
   const dispatch = useDispatch();
+  const isDarkMode = useSelector(isDarkModeSelector);
   const isAppLoading = useSelector(isAppLoadingSelector);
 
   useEffect(() => {
-    dispatch(attemptSignIn());
-    dispatch(getIsDarkMode());
+    dispatch(attemptSignIn.request());
+    dispatch(getParamsFromStorage.request());
   }, [dispatch]);
 
   const theme = createMuiTheme({
@@ -52,4 +52,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default App;

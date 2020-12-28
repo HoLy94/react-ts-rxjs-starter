@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 // Store
 import createReduxStoreWithEpic from './store';
 
-// Constans
+// Constants
 import {AppRoute} from './modules/navigation/constants';
 
 const Root = () => (

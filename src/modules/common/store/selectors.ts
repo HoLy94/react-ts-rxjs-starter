@@ -12,13 +12,19 @@ export const isDarkModeSelector = createSelector(
   (s) => s.isDarkMode,
 );
 
-export const isDarkModeGettingSelector = createSelector(
+export const isParamsFromStorageGettingSelector = createSelector(
   selectCommonStateSlice,
-  (s) => s.isDarkModeGetting,
+  (s) => s.isParamsFromStorageGetting,
 );
 
 export const isAppLoadingSelector = createSelector(
   isAuthorizingSelector,
-  isDarkModeGettingSelector,
-  (isAuthorizing, isDarkModeGetting) => isAuthorizing || isDarkModeGetting,
+  isParamsFromStorageGettingSelector,
+  (isAuthorizing, isParamsFromStorageGetting) =>
+    isAuthorizing || isParamsFromStorageGetting,
+);
+
+export const serverErrorSelector = createSelector(
+  selectCommonStateSlice,
+  (s) => s.serverError,
 );

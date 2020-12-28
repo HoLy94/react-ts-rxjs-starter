@@ -1,49 +1,48 @@
+import {of} from 'rxjs';
 import {AnyAction} from 'redux';
 import {isActionOf} from 'typesafe-actions';
-import {filter, map, withLatestFrom} from 'rxjs/operators';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import {ActionsObservable, StateObservable} from 'redux-observable';
 
 // Actions
 import * as a from './actions';
 
+// Constants
+import {DARK_MODE_STORAGE_KEY} from '../constants';
+
 // Models
 import {RootState} from '../../../store/rootReducer';
 import {Dependencies} from '../../../store/dependencies';
 
-// Selectors
-import {isDarkModeSelector} from './selectors';
-
 export const setIsDarkModeEpic = (
-  action$: ActionsObservable<AnyAction>,
-  state$: StateObservable<RootState>,
-  d: Dependencies,
-) =>
-  action$.pipe(
-    filter(isActionOf(a.toggleDarkMode)),
-    withLatestFrom(state$),
-    map(([_, state]) => {
-      const isDarkMode = isDarkModeSelector(state);
-
-      localStorage.setItem('isDarkMode', String(isDarkMode));
-
-      return a.setIsDarkMode();
-    }),
-  );
-
-export const getIsDarkModeEpic = (
   action$: ActionsObservable<AnyAction>,
   _: StateObservable<RootState>,
   d: Dependencies,
 ) =>
   action$.pipe(
-    filter(isActionOf(a.getIsDarkMode)),
-    map(() => {
-      const isDarkMode = localStorage.getItem('isDarkMode');
+    filter(isActionOf(a.setIsDarkMode.request)),
+    map(({payload}) => {
+      d.localStorageService.setItem(DARK_MODE_STORAGE_KEY, String(payload));
 
-      if (isDarkMode === null) {
-        return a.saveIsDarkMode(false);
-      }
+      return a.setIsDarkMode.success(payload);
+    }),
+  );
 
-      return a.saveIsDarkMode(JSON.parse(isDarkMode));
+export const getParamsFromStorageEpic = (
+  action$: ActionsObservable<AnyAction>,
+  _: StateObservable<RootState>,
+  d: Dependencies,
+) =>
+  action$.pipe(
+    filter(isActionOf(a.getParamsFromStorage.request)),
+    mergeMap(() => {
+      const isDarkMode = d.localStorageService.getItem(DARK_MODE_STORAGE_KEY);
+
+      return of(
+        a.setIsDarkMode.success(
+          isDarkMode === null ? false : JSON.parse(isDarkMode),
+        ),
+        a.getParamsFromStorage.success(),
+      );
     }),
   );

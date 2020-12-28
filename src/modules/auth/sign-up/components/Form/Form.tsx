@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {signUpFormConfig} from '../../constants';
 
 // Models
-import {SignUpCredentials} from '../../models';
+import {SignUpDto} from '../../models';
 
 // Components
 import {FormBuilder} from '../../../../../components/FormBuilder';
@@ -23,7 +23,7 @@ const SignUpForm: React.FC = () => {
   const signingUp = useSelector(signingUpSelector);
   const dispatch = useDispatch();
 
-  const handleSubmit = (params: SignUpCredentials) =>
+  const handleSubmit = (params: SignUpDto) =>
     dispatch(signUpAsync.request(params));
 
   return (
